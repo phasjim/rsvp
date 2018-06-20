@@ -1,5 +1,5 @@
 <div *ngFor="let member of partyMembers">
-  {{ member.firstName }} {{ member.lastName }}
+  {{ member.firstname }} {{ member.lastname }}
   <br>
 
   <mat-radio-group [(ngModel)]="member.isAttending">
@@ -19,6 +19,6 @@
 
 <br><br><br>
 <div *ngFor="let member of partyMembers">
-  {{ member.firstName }} {{ member.lastName }} is attending: {{ member.isAttending }}<br>
+  {{ member.firstname }} {{ member.lastname }} is attending: {{ member.isAttending }}<br>
   <!-- entree: {{ member.entree }} -->
 </div>

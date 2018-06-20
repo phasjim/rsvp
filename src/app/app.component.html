@@ -3,8 +3,8 @@
 
 <app-login *ngIf="isCorrectStep(rsvpStep.login)"
            [enableSecretCode]="true"
-           [guestList]="guestList"
-           (emitMainGuest)="setMainGuest($event)"></app-login>
+           [guestList]="primaryPartyMemberList"
+           (emitPrimaryPartyMember)="setPrimaryPartyMember($event)"></app-login>
 
 <app-rsvp *ngIf="isCorrectStep(rsvpStep.rsvp)"
           [partyMembers]="partyMembers"></app-rsvp>

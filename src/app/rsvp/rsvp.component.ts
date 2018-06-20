@@ -16,7 +16,6 @@ export class RsvpComponent implements OnInit {
   }
 
   isEntreeSelectionDisplayed(member: Guest) {
-    debugger;
     if(member.isAttending) return true;
     return false;
   }

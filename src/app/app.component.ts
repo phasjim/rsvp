@@ -1,33 +1,41 @@
 import { Component } from '@angular/core';
 
-import { Guest, MainGuest } from '../models/guest';
+import { Guest, PrimaryPartyMember } from '../models/guest';
+import { GoogleDriveService } from '../services/google-drive/google-drive.service';
 
 import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [ GoogleDriveService ]
 })
 export class AppComponent {
   rsvpStep = RsvpStep;
   step: RsvpStep = RsvpStep.login;
   
-  mainGuest: MainGuest;
+  // guestList: Guest[];
+  primaryPartyMember: PrimaryPartyMember;
   partyMembers: Guest[];
 
-  // TODO: Need to read this from somewhere
-  guestList = [
-    { firstName: 'Prita', lastName: 'Hasjim', code: '123', partyMembers: [
-      { firstName: 'Prita', lastName: 'Hasjim', isAttending: false, entree: '' }
-    ]}, 
-    { firstName: 'Derek', lastName: 'Bloom', code: '123', partyMembers: [
-      { firstName: 'Derek', lastName: 'Bloom', isAttending: false, entree: '' },
-      { firstName: 'Brianna', lastName: 'B-C', isAttending: false, entree: '' }
-    ]}
-  ];
+  guestList: Guest[];
+  primaryPartyMemberList: PrimaryPartyMember[];
+  dataId: string;
 
-  constructor() { }
+  constructor(googleDriveService: GoogleDriveService) {
+    this.dataId = '11wKfDNr0ylaWpbT9eAQnTtOabvVESdLv7-2trVh1s-k';
+    googleDriveService.load(this.dataId)
+      .then((data) => {
+        // Sets guest list
+        this.guestList = data;
+
+        // Creates a list of all the "main guests"
+        this.initPrimaryPartyMemberList();
+      }, (error) => {
+        console.log(error);
+      })
+  }
 
   ngOnInit() {
   }
@@ -36,15 +44,36 @@ export class AppComponent {
     return this.step === currentStep;
   }
 
-  setMainGuest(mainGuest: MainGuest) {
-    this.mainGuest = _.find(this.guestList, (g) => {
+  setPrimaryPartyMember(primaryPartyMember: PrimaryPartyMember) {
+    this.primaryPartyMember = _.find(this.guestList, (g) => {
       // TODO: There needs to be a more eloquent way to convert everything toLowerCase()
-      return (mainGuest.firstName.toLowerCase() === g.firstName) && (mainGuest.lastName.toLowerCase() === g.lastName);
+      return (primaryPartyMember.partyfirstname.toLowerCase() === g.firstname) && (primaryPartyMember.partylastname.toLowerCase() === g.lastname);
     });
-    console.log(this.mainGuest);
-    this.partyMembers = this.mainGuest.partyMembers;
+    console.log(this.primaryPartyMember);
+    this.partyMembers = this.primaryPartyMember.partymembers;
 
     this.step = RsvpStep.rsvp;
+  }
+
+  /* Creates a list of all of the "main guests" */
+  private initPrimaryPartyMemberList() {
+    this.primaryPartyMemberList = _.filter(this.guestList, (g) => {
+      return (g.guestfirstname === g.partyfirstname) && (g.guestlastname === g.partylastname);
+    });
+
+    // Iterate through guestList again and populate the partymembers array
+    _.forEach(this.guestList, (g) => {
+      // Find the primary party member for each guest in primaryPartyMemberList
+      let primaryPartyMember = _.find(this.primaryPartyMemberList, (pg) => {
+        return (pg.guestfirstname === g.partyfirstname) && (pg.guestlastname === g.partylastname);
+      });
+
+      if(!primaryPartyMember.partymembers) {
+        primaryPartyMember.partymembers = [];
+      }
+
+      primaryPartyMember.partymembers.push(g);
+    });
   }
 
 }

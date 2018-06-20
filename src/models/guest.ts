@@ -1,12 +1,16 @@
 export class Guest {
-  firstName: string;
-  lastName: string;
+  guestfirstname: string;
+  guestlastname: string;
+  
+  partyfirstname: string;
+  partylastname: string;
+
+  code: string;
 
   isAttending: boolean;
   entree: string;
 }
 
-export class MainGuest extends Guest {
-  code: string;
-  partyMembers: Guest[];
+export class PrimaryPartyMember extends Guest {
+  partymembers: Guest[] = [];
 }

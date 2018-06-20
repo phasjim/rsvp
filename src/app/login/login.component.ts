@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
-import { MainGuest } from '../../models/guest';
+import { PrimaryPartyMember } from '../../models/guest';
 
 import * as _ from 'lodash';
 
@@ -11,11 +11,10 @@ import * as _ from 'lodash';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @Input() guestList: MainGuest[];
+  @Input() guestList: PrimaryPartyMember[];
   @Input() enableSecretCode: boolean;
 
-  @Output() emitMainGuest: EventEmitter<MainGuest> = new EventEmitter<MainGuest>();
-
+  @Output() emitPrimaryPartyMember: EventEmitter<PrimaryPartyMember> = new EventEmitter<PrimaryPartyMember>();
 
   guestForm: FormGroup;
 
@@ -32,15 +31,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(guestForm: FormGroup) {
-    let mainGuest: MainGuest = guestForm.value;
-    this.emitMainGuest.emit(mainGuest);
+    let PrimaryPartyMember: PrimaryPartyMember = guestForm.value;
+    this.emitPrimaryPartyMember.emit(PrimaryPartyMember);
   }
 
   /* Initializes the guest list */
   private initGuestList() {
     _.forEach(this.guestList, (guest) => {
-      guest.firstName = guest.firstName.toLowerCase();
-      guest.lastName = guest.lastName.toLowerCase();
+      guest.partyfirstname = guest.partyfirstname.toLowerCase();
+      guest.partylastname = guest.partylastname.toLowerCase();
       guest.code = guest.code.toLowerCase();
     });
   }
@@ -48,50 +47,49 @@ export class LoginComponent implements OnInit {
   /* Initializes the form */
   private initForm() {
     this.guestForm = this.fb.group({
-      firstName: ['', Validators.compose([Validators.required, this.firstNameExists(this.guestList)]) ],
-      lastName: ['', Validators.required ],
+      firstname: ['', Validators.compose([Validators.required, this.firstnameExists(this.guestList)]) ],
+      lastname: ['', Validators.required ],
       code: ['', Validators.required ]
-    }, { validator: this.validateLastNameAndCode(this.guestList, this.enableSecretCode) });
+    }, { validator: this.validatelastnameAndCode(this.guestList, this.enableSecretCode) });
   }
 
    /* Custom validation to check if first name exists */
-  private firstNameExists(fullGuestList: any[]) {
+  private firstnameExists(fullGuestList: any[]) {
       return (control: FormControl): {[key: string]: any} | null => {
-        let firstNameValue = control.value.toLowerCase();
-        let index = _.findIndex(fullGuestList, { firstName: firstNameValue});
-        
+        let firstnameValue = control.value.toLowerCase();
+        let index = _.findIndex(fullGuestList, { partyfirstname: firstnameValue});
         if(index < 0) {
-          return {'firstNameDoesNotExist': firstNameValue};
+          return {'firstnameDoesNotExist': firstnameValue};
         }
         return null;
       }
   }
 
   /* Custom validation to check if last name matches first name */
-  private validateLastNameAndCode(fullGuestList: any[], enableSecretCode?: boolean) {
+  private validatelastnameAndCode(fullGuestList: any[], enableSecretCode?: boolean) {
     return (group: FormGroup): {[key: string]: any} | null => {
-      let firstNameValue = group.get('firstName').value.toLowerCase();
-      let lastNameValue = group.get('lastName').value.toLowerCase();
+      let firstnameValue = group.get('firstname').value.toLowerCase();
+      let lastnameValue = group.get('lastname').value.toLowerCase();
       let codeValue = group.get('code').value.toLowerCase();
-      let guest = _.find(fullGuestList, { firstName: firstNameValue });
+      let guest = _.find(fullGuestList, { partyfirstname: firstnameValue });
 
       let error = null;
 
       // Checks if the first name is valid
-      if(group.get('firstName').valid) {
-        if(lastNameValue && !codeValue) {
-          if(lastNameValue !== guest.lastName) {
-            error = {'lastNameNotValid': lastNameValue};
-            group.get('lastName').setErrors(error);
+      if(group.get('firstname').valid) {
+        if(lastnameValue && !codeValue) {
+          if(lastnameValue !== guest.lastname) {
+            error = {'lastnameNotValid': lastnameValue};
+            group.get('lastname').setErrors(error);
           }
         }
         else if (codeValue) {
-          if(lastNameValue !== guest.lastName) {
-            // Clear code errors to focus on lastName
+          if(lastnameValue !== guest.lastname) {
+            // Clear code errors to focus on lastname
             group.get('code').setErrors(null);
 
-            error = {'lastNameNotValid': lastNameValue};
-            group.get('lastName').setErrors(error);
+            error = {'lastnameNotValid': lastnameValue};
+            group.get('lastname').setErrors(error);
           }
           else if(codeValue !== guest.code) {
             error = {'codeNotValid': codeValue};
@@ -99,8 +97,8 @@ export class LoginComponent implements OnInit {
           }
         }
       } else {
-        // Clear errors on last name and code to focus on firstName
-        if(lastNameValue) group.get('lastName').setErrors(null);
+        // Clear errors on last name and code to focus on firstname
+        if(lastnameValue) group.get('lastname').setErrors(null);
         if(codeValue)     group.get('code').setErrors(null);
       }
       return error;
