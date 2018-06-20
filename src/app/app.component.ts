@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  // TODO: need to define a class
+  guests = [
+    { firstName: 'Prita', lastName: 'Hasjim', code: '123'}, 
+    { firstName: 'Bima', lastName: 'Hasjim', code: '123'}, 
+    { firstName: 'Bahari', lastName: 'Hasjim', code: '123'}, 
+  ];
+
+  constructor() { }
+
+  ngOnInit() {
+    console.log(this.guests);
+  }
 }
