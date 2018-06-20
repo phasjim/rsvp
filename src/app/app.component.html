@@ -5,3 +5,6 @@
            [enableSecretCode]="true"
            [guestList]="guestList"
            (emitMainGuest)="setMainGuest($event)"></app-login>
+
+<app-rsvp *ngIf="isCorrectStep(rsvpStep.rsvp)"
+          [partyMembers]="partyMembers"></app-rsvp>

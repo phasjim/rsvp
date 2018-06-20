@@ -10,17 +10,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
-  MatCheckboxModule,
+  MatRadioModule,
   MatInputModule
 } from '@angular/material';
 
 import { LoginComponent } from './login/login.component';
+import { RsvpComponent } from './rsvp/rsvp.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    RsvpComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,7 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
 
     MatButtonModule,
-    MatCheckboxModule,
+    MatRadioModule,
     MatInputModule,
   ],
   providers: [],
