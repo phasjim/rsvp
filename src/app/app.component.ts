@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
-import { MainGuest } from '../models/guest';
+import { Guest, MainGuest } from '../models/guest';
+
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +14,16 @@ export class AppComponent {
   step: RsvpStep = RsvpStep.login;
   
   mainGuest: MainGuest;
+  partyMembers: Guest[];
 
   // TODO: Need to read this from somewhere
   guestList = [
     { firstName: 'Prita', lastName: 'Hasjim', code: '123', partyMembers: [
-      { firstName: 'Prita', lastName: 'Hasjim' }
+      { firstName: 'Prita', lastName: 'Hasjim', isAttending: false, entree: '' }
     ]}, 
     { firstName: 'Derek', lastName: 'Bloom', code: '123', partyMembers: [
-      { firstName: 'DereK', lastName: 'Bloom' },
-      { firstName: 'Brianna', lastName: 'B-C' }
+      { firstName: 'Derek', lastName: 'Bloom', isAttending: false, entree: '' },
+      { firstName: 'Brianna', lastName: 'B-C', isAttending: false, entree: '' }
     ]}
   ];
 
@@ -34,9 +37,16 @@ export class AppComponent {
   }
 
   setMainGuest(mainGuest: MainGuest) {
-    this.mainGuest = mainGuest;
+    this.mainGuest = _.find(this.guestList, (g) => {
+      // TODO: There needs to be a more eloquent way to convert everything toLowerCase()
+      return (mainGuest.firstName.toLowerCase() === g.firstName) && (mainGuest.lastName.toLowerCase() === g.lastName);
+    });
+    console.log(this.mainGuest);
+    this.partyMembers = this.mainGuest.partyMembers;
+
     this.step = RsvpStep.rsvp;
   }
+
 }
 
 enum RsvpStep {
