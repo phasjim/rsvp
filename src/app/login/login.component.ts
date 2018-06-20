@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import { MainGuest } from '../../models/guest';
@@ -11,9 +11,11 @@ import * as _ from 'lodash';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  // TODO: This is not strongly typed
   @Input() guestList: MainGuest[];
   @Input() enableSecretCode: boolean;
+
+  @Output() emitMainGuest: EventEmitter<MainGuest> = new EventEmitter<MainGuest>();
+
 
   guestForm: FormGroup;
 
@@ -29,9 +31,9 @@ export class LoginComponent implements OnInit {
     if(this.guestList) this.initGuestList();
   }
 
-  onSubmit(guestForm) {
-    debugger;
-    console.log(guestForm);
+  onSubmit(guestForm: FormGroup) {
+    let mainGuest: MainGuest = guestForm.value;
+    this.emitMainGuest.emit(mainGuest);
   }
 
   /* Initializes the guest list */

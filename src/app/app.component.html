@@ -1,5 +1,7 @@
 <h1>You're invited to</h1>
 <h2>Jamie &amp; Bima's Wedding</h2>
 
-<app-login [enableSecretCode]="true"
-           [guestList]="guestList"></app-login>
+<app-login *ngIf="isCorrectStep(rsvpStep.login)"
+           [enableSecretCode]="true"
+           [guestList]="guestList"
+           (emitMainGuest)="setMainGuest($event)"></app-login>
