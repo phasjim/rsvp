@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   // TODO: need to define a class
-  guests = [
+  guestList = [
     { firstName: 'Prita', lastName: 'Hasjim', code: '123'}, 
     { firstName: 'Bima', lastName: 'Hasjim', code: '123'}, 
     { firstName: 'Bahari', lastName: 'Hasjim', code: '123'}, 
@@ -16,6 +16,5 @@ export class AppComponent {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.guests);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import * as _ from 'lodash';
 
@@ -10,30 +10,54 @@ import * as _ from 'lodash';
 })
 export class LoginComponent implements OnInit {
   // TODO: This is not strongly typed
-  @Input() guests: any[];
+  @Input() guestList: any[];
 
   guestForm: FormGroup;
 
   constructor(
     private fb: FormBuilder
-  ) {
+  ) { }
+
+  ngOnInit() {
     this.initForm();
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if(this.guestList) this.initGuestList();
   }
 
   validate() {
-    debugger;
-    let index = _.findIndex(this.guests, { firstName: 'Prita'});
+    let index = _.findIndex(this.guestList, { firstName: 'Prita'});
+  }
+
+  /* Custom validation to check if the name exists */
+  firstNameExists(fullGuestList: any[]) {
+      return (control: FormControl): {[key: string]: any} | null => {
+        let value = control.value.toLowerCase();
+        let index = _.findIndex(fullGuestList, { firstName: value});
+        debugger;
+        if(index < 0) {
+          return {'firstNameDoesNotExist': value};
+        }
+        return null;
+      }
+  }
+
+  private initGuestList() {
+    _.forEach(this.guestList, (guest) => {
+      guest.firstName = guest.firstName.toLowerCase();
+      guest.lastName = guest.lastName.toLowerCase();
+      guest.code = guest.code.toLowerCase();
+    });
+    console.log('lowercase guest list');
+    console.log(this.guestList);
   }
 
   private initForm() {
     this.guestForm = this.fb.group({
-      firstName: ['', Validators.required ],
+      firstName: ['', Validators.compose([Validators.required, this.firstNameExists(this.guestList)]) ],
       lastName: ['', Validators.required ],
       code: ['', Validators.required ]
     });
-    debugger;
   }
 }
