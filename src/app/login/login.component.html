@@ -1,4 +1,6 @@
-<form style="width:100%;" [formGroup]="guestForm">
+<form style="width:100%;"
+      [formGroup]="guestForm"
+      (ngSubmit)="onSubmit(guestForm)">
   <mat-form-field>
     <input matInput
            placeholder="First name"
@@ -27,6 +29,7 @@
 
   <!-- TODO: This should be optional security measure that the user can pick. -->
   <!-- Ask yourself, who would actually hack your invitation other than other CS geeks? -->
+  <!-- Should this be custom per guest? Or one universal code for the bride/groom? -->
   <mat-form-field *ngIf="enableSecretCode">
     <input matInput
            placeholder="Secret Code"
@@ -38,8 +41,11 @@
       Secret code is incorrect
     </mat-error>
   </mat-form-field>
-</form>
 
-<button mat-button
-        color="primary"
-        (click)="validate()">RSVP</button>
+  <br>
+
+  <button mat-button
+          color="primary"
+          type="submit"
+          [disabled]="guestForm.invalid">Access My Invite</button>
+</form>

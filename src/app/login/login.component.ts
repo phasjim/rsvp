@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
+import { MainGuest } from '../../models/guest';
+
 import * as _ from 'lodash';
 
 @Component({
@@ -10,7 +12,7 @@ import * as _ from 'lodash';
 })
 export class LoginComponent implements OnInit {
   // TODO: This is not strongly typed
-  @Input() guestList: any[];
+  @Input() guestList: MainGuest[];
   @Input() enableSecretCode: boolean;
 
   guestForm: FormGroup;
@@ -27,12 +29,31 @@ export class LoginComponent implements OnInit {
     if(this.guestList) this.initGuestList();
   }
 
-  validate() {
-    let index = _.findIndex(this.guestList, { firstName: 'Prita'});
+  onSubmit(guestForm) {
+    debugger;
+    console.log(guestForm);
   }
 
-  /* Custom validation to check if first name exists */
-  firstNameExists(fullGuestList: any[]) {
+  /* Initializes the guest list */
+  private initGuestList() {
+    _.forEach(this.guestList, (guest) => {
+      guest.firstName = guest.firstName.toLowerCase();
+      guest.lastName = guest.lastName.toLowerCase();
+      guest.code = guest.code.toLowerCase();
+    });
+  }
+
+  /* Initializes the form */
+  private initForm() {
+    this.guestForm = this.fb.group({
+      firstName: ['', Validators.compose([Validators.required, this.firstNameExists(this.guestList)]) ],
+      lastName: ['', Validators.required ],
+      code: ['', Validators.required ]
+    }, { validator: this.validateLastNameAndCode(this.guestList, this.enableSecretCode) });
+  }
+
+   /* Custom validation to check if first name exists */
+  private firstNameExists(fullGuestList: any[]) {
       return (control: FormControl): {[key: string]: any} | null => {
         let firstNameValue = control.value.toLowerCase();
         let index = _.findIndex(fullGuestList, { firstName: firstNameValue});
@@ -45,7 +66,7 @@ export class LoginComponent implements OnInit {
   }
 
   /* Custom validation to check if last name matches first name */
-  validateLastNameAndCode(fullGuestList: any[], enableSecretCode?: boolean) {
+  private validateLastNameAndCode(fullGuestList: any[], enableSecretCode?: boolean) {
     return (group: FormGroup): {[key: string]: any} | null => {
       let firstNameValue = group.get('firstName').value.toLowerCase();
       let lastNameValue = group.get('lastName').value.toLowerCase();
@@ -53,7 +74,7 @@ export class LoginComponent implements OnInit {
       let guest = _.find(fullGuestList, { firstName: firstNameValue });
 
       let error = null;
-      debugger;
+
       // Checks if the first name is valid
       if(group.get('firstName').valid) {
         if(lastNameValue && !codeValue) {
@@ -64,7 +85,7 @@ export class LoginComponent implements OnInit {
         }
         else if (codeValue) {
           if(lastNameValue !== guest.lastName) {
-            // Clear code errors to focus on last name errors
+            // Clear code errors to focus on lastName
             group.get('code').setErrors(null);
 
             error = {'lastNameNotValid': lastNameValue};
@@ -75,24 +96,12 @@ export class LoginComponent implements OnInit {
             group.get('code').setErrors(error);
           }
         }
+      } else {
+        // Clear errors on last name and code to focus on firstName
+        if(lastNameValue) group.get('lastName').setErrors(null);
+        if(codeValue)     group.get('code').setErrors(null);
       }
       return error;
     } 
-  }
-
-  private initGuestList() {
-    _.forEach(this.guestList, (guest) => {
-      guest.firstName = guest.firstName.toLowerCase();
-      guest.lastName = guest.lastName.toLowerCase();
-      guest.code = guest.code.toLowerCase();
-    });
-  }
-
-  private initForm() {
-    this.guestForm = this.fb.group({
-      firstName: ['', Validators.compose([Validators.required, this.firstNameExists(this.guestList)]) ],
-      lastName: ['', Validators.required ],
-      code: ['', Validators.required ]
-    }, { validator: this.validateLastNameAndCode(this.guestList, this.enableSecretCode) });
   }
 }
