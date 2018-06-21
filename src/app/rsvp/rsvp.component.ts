@@ -32,7 +32,6 @@ export class RsvpComponent implements OnInit {
       this.partyForm = this.fb.group({
         partymemberslist: this.fb.array(list)
       });
-      debugger;
     }
   }
 

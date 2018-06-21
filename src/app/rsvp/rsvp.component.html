@@ -2,7 +2,7 @@
   <div formArrayName="partymemberslist"
        *ngFor="let member of partyForm.get('partymemberslist').controls; let i = index;">
     <div [formGroupName]="i">
-      {{ this.partyForm.controls.partymemberslist.controls[0].value.guestfirstname }} {{ this.partyForm.controls.partymemberslist.controls[0].value.guestlastname }}
+      {{ this.partyForm.controls.partymemberslist.controls[i].value.guestfirstname }} {{ this.partyForm.controls.partymemberslist.controls[i].value.guestlastname }}
       <!-- <input [formControlName]="guestfirstname" placeholder="Item name"> -->
       <!-- <input formControlName="description" placeholder="Item description"> -->
       <!-- <input formControlName="price" placeholder="Item price"> -->
