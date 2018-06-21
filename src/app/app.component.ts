@@ -19,18 +19,17 @@ export class AppComponent {
   primaryPartyMember: PrimaryPartyMember;
   partyMembers: Guest[];
 
-  guestList: Guest[];
-  primaryPartyMemberList: PrimaryPartyMember[];
+  guestList: Guest[] = [];
+  primaryPartyMemberList: PrimaryPartyMember[] = [];
   dataId: string;
 
   constructor(googleDriveService: GoogleDriveService) {
     this.dataId = '11wKfDNr0ylaWpbT9eAQnTtOabvVESdLv7-2trVh1s-k';
     googleDriveService.load(this.dataId)
       .then((data) => {
-        // Sets guest list
-        this.guestList = data;
-
-        // Creates a list of all the "main guests"
+        // sets guest list
+        this.initGuestList(data);
+        // sets list of primary party members
         this.initPrimaryPartyMemberList();
       }, (error) => {
         console.log(error);
@@ -55,24 +54,39 @@ export class AppComponent {
     this.step = RsvpStep.rsvp;
   }
 
+  /* Turn every property in guest list lowercase */
+  private initGuestList(data: Guest[]) {
+    _.forEach(data, (d) => {
+      let newGuest = new Guest();
+      newGuest.partyfirstname = d.partyfirstname.toLowerCase();
+      newGuest.partylastname = d.partyfirstname.toLowerCase();
+      newGuest.guestfirstname = d.guestfirstname.toLowerCase();
+      newGuest.guestlastname = d.guestlastname.toLowerCase();
+      newGuest.code = d.code.toLowerCase();
+
+      this.guestList.push(newGuest);
+    });
+  }
+
   /* Creates a list of all of the "main guests" */
   private initPrimaryPartyMemberList() {
-    this.primaryPartyMemberList = _.filter(this.guestList, (g) => {
-      return (g.guestfirstname === g.partyfirstname) && (g.guestlastname === g.partylastname);
-    });
+    // this.primaryPartyMemberList = _.filter(this.guestList, (g) => {
+    //   return (g.guestfirstname === g.partyfirstname) && (g.guestlastname === g.partylastname);
+    // });
 
     // Iterate through guestList again and populate the partymembers array
     _.forEach(this.guestList, (g) => {
-      // Find the primary party member for each guest in primaryPartyMemberList
-      let primaryPartyMember = _.find(this.primaryPartyMemberList, (pg) => {
-        return (pg.guestfirstname === g.partyfirstname) && (pg.guestlastname === g.partylastname);
-      });
+      // If primary party member has already been added, add the guest to its partymembers
+      debugger;
+      let index = _.findIndex(this.primaryPartyMemberList, { partyfirstname: g.partyfirstname, partylastname: g.partylastname });
+      if(index >= 0) {
+        this.primaryPartyMemberList[index].partymembers.push(g);
+      } else {
+        let newPrimaryMember = new PrimaryPartyMember(g);
+        newPrimaryMember.partymembers.push(g);
 
-      if(!primaryPartyMember.partymembers) {
-        primaryPartyMember.partymembers = [];
+        this.primaryPartyMemberList.push(newPrimaryMember);
       }
-
-      primaryPartyMember.partymembers.push(g);
     });
   }
 

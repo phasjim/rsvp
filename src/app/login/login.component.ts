@@ -27,21 +27,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if(this.guestList) this.initGuestList();
+    if(this.guestList) {
+      debugger;
+    }
   }
 
   onSubmit(guestForm: FormGroup) {
     let PrimaryPartyMember: PrimaryPartyMember = guestForm.value;
     this.emitPrimaryPartyMember.emit(PrimaryPartyMember);
-  }
-
-  /* Initializes the guest list */
-  private initGuestList() {
-    _.forEach(this.guestList, (guest) => {
-      guest.partyfirstname = guest.partyfirstname.toLowerCase();
-      guest.partylastname = guest.partylastname.toLowerCase();
-      guest.code = guest.code.toLowerCase();
-    });
   }
 
   /* Initializes the form */
@@ -55,14 +48,15 @@ export class LoginComponent implements OnInit {
 
    /* Custom validation to check if first name exists */
   private firstnameExists(fullGuestList: any[]) {
-      return (control: FormControl): {[key: string]: any} | null => {
-        let firstnameValue = control.value.toLowerCase();
-        let index = _.findIndex(fullGuestList, { partyfirstname: firstnameValue});
-        if(index < 0) {
-          return {'firstnameDoesNotExist': firstnameValue};
-        }
-        return null;
+    console.log(fullGuestList);
+    return (control: FormControl): {[key: string]: any} | null => {
+      let firstnameValue = control.value.toLowerCase();
+      let index = _.findIndex(fullGuestList, { partyfirstname: firstnameValue});
+      if(index < 0) {
+        return {'firstnameDoesNotExist': firstnameValue};
       }
+      return null;
+    }
   }
 
   /* Custom validation to check if last name matches first name */

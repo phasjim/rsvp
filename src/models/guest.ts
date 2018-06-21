@@ -11,6 +11,18 @@ export class Guest {
   entree: string;
 }
 
-export class PrimaryPartyMember extends Guest {
-  partymembers: Guest[] = [];
+export class PrimaryPartyMember {
+  partyfirstname: string;
+  partylastname: string;
+  code: string;
+
+  partymembers: Guest[];
+
+  constructor(guest: Guest) {
+    this.partyfirstname = guest.partyfirstname;
+    this.partylastname = guest.partylastname;
+    this.code = guest.code;
+    
+    this.partymembers = [];
+  }
 }
