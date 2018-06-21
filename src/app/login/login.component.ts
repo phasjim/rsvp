@@ -27,9 +27,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnChanges() {
-    if(this.guestList) {
-      debugger;
-    }
   }
 
   onSubmit(guestForm: FormGroup) {
@@ -43,7 +40,7 @@ export class LoginComponent implements OnInit {
       firstname: ['', Validators.compose([Validators.required, this.firstnameExists(this.guestList)]) ],
       lastname: ['', Validators.required ],
       code: ['', Validators.required ]
-    }, { validator: this.validatelastnameAndCode(this.guestList, this.enableSecretCode) });
+    }, { validator: this.validateLastnameAndCode(this.guestList, this.enableSecretCode) });
   }
 
    /* Custom validation to check if first name exists */
@@ -60,8 +57,9 @@ export class LoginComponent implements OnInit {
   }
 
   /* Custom validation to check if last name matches first name */
-  private validatelastnameAndCode(fullGuestList: any[], enableSecretCode?: boolean) {
+  private validateLastnameAndCode(fullGuestList: any[], enableSecretCode?: boolean) {
     return (group: FormGroup): {[key: string]: any} | null => {
+      debugger;
       let firstnameValue = group.get('firstname').value.toLowerCase();
       let lastnameValue = group.get('lastname').value.toLowerCase();
       let codeValue = group.get('code').value.toLowerCase();
@@ -72,13 +70,13 @@ export class LoginComponent implements OnInit {
       // Checks if the first name is valid
       if(group.get('firstname').valid) {
         if(lastnameValue && !codeValue) {
-          if(lastnameValue !== guest.lastname) {
+          if(lastnameValue !== guest.partylastname) {
             error = {'lastnameNotValid': lastnameValue};
             group.get('lastname').setErrors(error);
           }
         }
         else if (codeValue) {
-          if(lastnameValue !== guest.lastname) {
+          if(lastnameValue !== guest.partylastname) {
             // Clear code errors to focus on lastname
             group.get('code').setErrors(null);
 

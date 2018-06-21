@@ -59,7 +59,7 @@ export class AppComponent {
     _.forEach(data, (d) => {
       let newGuest = new Guest();
       newGuest.partyfirstname = d.partyfirstname.toLowerCase();
-      newGuest.partylastname = d.partyfirstname.toLowerCase();
+      newGuest.partylastname = d.partylastname.toLowerCase();
       newGuest.guestfirstname = d.guestfirstname.toLowerCase();
       newGuest.guestlastname = d.guestlastname.toLowerCase();
       newGuest.code = d.code.toLowerCase();
@@ -70,14 +70,9 @@ export class AppComponent {
 
   /* Creates a list of all of the "main guests" */
   private initPrimaryPartyMemberList() {
-    // this.primaryPartyMemberList = _.filter(this.guestList, (g) => {
-    //   return (g.guestfirstname === g.partyfirstname) && (g.guestlastname === g.partylastname);
-    // });
-
     // Iterate through guestList again and populate the partymembers array
     _.forEach(this.guestList, (g) => {
       // If primary party member has already been added, add the guest to its partymembers
-      debugger;
       let index = _.findIndex(this.primaryPartyMemberList, { partyfirstname: g.partyfirstname, partylastname: g.partylastname });
       if(index >= 0) {
         this.primaryPartyMemberList[index].partymembers.push(g);
