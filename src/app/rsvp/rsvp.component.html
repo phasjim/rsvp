@@ -1,5 +1,23 @@
+<form [formGroup]="partyForm">
+  <div formArrayName="partymemberslist"
+       *ngFor="let member of partyForm.get('partymemberslist').controls; let i = index;">
+    <div [formGroupName]="i">
+      {{ this.partyForm.controls.partymemberslist.controls[0].value.guestfirstname }} {{ this.partyForm.controls.partymemberslist.controls[0].value.guestlastname }}
+      <!-- <input [formControlName]="guestfirstname" placeholder="Item name"> -->
+      <!-- <input formControlName="description" placeholder="Item description"> -->
+      <!-- <input formControlName="price" placeholder="Item price"> -->
+    </div>
+
+  </div>
+</form>
+
+
+
+
+
+<!-- 
 <div *ngFor="let member of partyMembers">
-  {{ member.firstname }} {{ member.lastname }}
+  {{ member.guestfirstname }} {{ member.guestlastname }}
   <br>
 
   <mat-radio-group [(ngModel)]="member.isAttending">
@@ -8,17 +26,9 @@
   </mat-radio-group>
 
   <br>
-  <!-- <div *ngIf="isEntreeSelectionDisplayed(member)">
-    <mat-radio-group [(ngModel)]="member.entree">
-      <mat-radio-button value="veggie">Veggie</mat-radio-button>
-      <mat-radio-button value="chicken">Chicken</mat-radio-button>
-      <mat-radio-button value="beef">Beef</mat-radio-button>
-    </mat-radio-group>
-  </div> -->
 </div>
 
 <br><br><br>
 <div *ngFor="let member of partyMembers">
-  {{ member.firstname }} {{ member.lastname }} is attending: {{ member.isAttending }}<br>
-  <!-- entree: {{ member.entree }} -->
-</div>
+  {{ member.guestfirstname }} {{ member.guestlastname }} is attending: {{ member.isAttending }}<br>
+</div> -->

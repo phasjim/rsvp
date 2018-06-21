@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
 
    /* Custom validation to check if first name exists */
   private firstnameExists(fullGuestList: any[]) {
-    console.log(fullGuestList);
     return (control: FormControl): {[key: string]: any} | null => {
       let firstnameValue = control.value.toLowerCase();
       let index = _.findIndex(fullGuestList, { partyfirstname: firstnameValue});

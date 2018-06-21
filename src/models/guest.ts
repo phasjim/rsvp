@@ -7,8 +7,8 @@ export class Guest {
 
   code: string;
 
-  isAttending: boolean;
-  entree: string;
+  isAttending: boolean = false;
+  entree: string = '';
 }
 
 export class PrimaryPartyMember {
