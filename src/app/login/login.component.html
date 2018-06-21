@@ -4,11 +4,11 @@
   <mat-form-field>
     <input matInput
            placeholder="First name"
-           formControlName="firstname">
-    <mat-error *ngIf="guestForm.controls['firstname'].touched && guestForm.controls['firstname'].hasError('required')">
+           formControlName="partyfirstname">
+    <mat-error *ngIf="guestForm.controls['partyfirstname'].touched && guestForm.controls['partyfirstname'].hasError('required')">
       Required
     </mat-error>
-    <mat-error *ngIf="guestForm.controls['firstname'].touched && guestForm.controls['firstname'].hasError('firstnameDoesNotExist')">
+    <mat-error *ngIf="guestForm.controls['partyfirstname'].touched && guestForm.controls['partyfirstname'].hasError('firstnameDoesNotExist')">
       First name does not exist
     </mat-error>
   </mat-form-field>
@@ -16,11 +16,11 @@
   <mat-form-field>
     <input matInput
            placeholder="Last name"
-           formControlName="lastname">
-    <mat-error *ngIf="guestForm.controls['lastname'].touched && guestForm.controls['lastname'].hasError('required')">
+           formControlName="partylastname">
+    <mat-error *ngIf="guestForm.controls['partylastname'].touched && guestForm.controls['partylastname'].hasError('required')">
       Required
     </mat-error>
-    <mat-error *ngIf="guestForm.controls['lastname'].touched && guestForm.controls['lastname'].hasError('lastnameNotValid')">
+    <mat-error *ngIf="guestForm.controls['partylastname'].touched && guestForm.controls['partylastname'].hasError('lastnameNotValid')">
       Last name does not match
     </mat-error>
   </mat-form-field>

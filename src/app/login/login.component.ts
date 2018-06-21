@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
   /* Initializes the form */
   private initForm() {
     this.guestForm = this.fb.group({
-      firstname: ['', Validators.compose([Validators.required, this.firstnameExists(this.guestList)]) ],
-      lastname: ['', Validators.required ],
+      partyfirstname: ['', Validators.compose([Validators.required, this.firstnameExists(this.guestList)]) ],
+      partylastname: ['', Validators.required ],
       code: ['', Validators.required ]
     }, { validator: this.validateLastnameAndCode(this.guestList, this.enableSecretCode) });
   }
@@ -59,20 +59,19 @@ export class LoginComponent implements OnInit {
   /* Custom validation to check if last name matches first name */
   private validateLastnameAndCode(fullGuestList: any[], enableSecretCode?: boolean) {
     return (group: FormGroup): {[key: string]: any} | null => {
-      debugger;
-      let firstnameValue = group.get('firstname').value.toLowerCase();
-      let lastnameValue = group.get('lastname').value.toLowerCase();
+      let firstnameValue = group.get('partyfirstname').value.toLowerCase();
+      let lastnameValue = group.get('partylastname').value.toLowerCase();
       let codeValue = group.get('code').value.toLowerCase();
       let guest = _.find(fullGuestList, { partyfirstname: firstnameValue });
 
       let error = null;
 
       // Checks if the first name is valid
-      if(group.get('firstname').valid) {
+      if(group.get('partyfirstname').valid) {
         if(lastnameValue && !codeValue) {
           if(lastnameValue !== guest.partylastname) {
             error = {'lastnameNotValid': lastnameValue};
-            group.get('lastname').setErrors(error);
+            group.get('partylastname').setErrors(error);
           }
         }
         else if (codeValue) {
@@ -81,7 +80,7 @@ export class LoginComponent implements OnInit {
             group.get('code').setErrors(null);
 
             error = {'lastnameNotValid': lastnameValue};
-            group.get('lastname').setErrors(error);
+            group.get('partylastname').setErrors(error);
           }
           else if(codeValue !== guest.code) {
             error = {'codeNotValid': codeValue};
@@ -90,7 +89,7 @@ export class LoginComponent implements OnInit {
         }
       } else {
         // Clear errors on last name and code to focus on firstname
-        if(lastnameValue) group.get('lastname').setErrors(null);
+        if(lastnameValue) group.get('partylastname').setErrors(null);
         if(codeValue)     group.get('code').setErrors(null);
       }
       return error;

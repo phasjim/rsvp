@@ -44,11 +44,10 @@ export class AppComponent {
   }
 
   setPrimaryPartyMember(primaryPartyMember: PrimaryPartyMember) {
-    this.primaryPartyMember = _.find(this.guestList, (g) => {
-      // TODO: There needs to be a more eloquent way to convert everything toLowerCase()
-      return (primaryPartyMember.partyfirstname.toLowerCase() === g.firstname) && (primaryPartyMember.partylastname.toLowerCase() === g.lastname);
+    this.primaryPartyMember = _.find(this.primaryPartyMemberList, (g) => {
+      return (primaryPartyMember.partyfirstname.toLowerCase() === g.partyfirstname) &&
+             (primaryPartyMember.partylastname.toLowerCase() === g.partylastname);
     });
-    console.log(this.primaryPartyMember);
     this.partyMembers = this.primaryPartyMember.partymembers;
 
     this.step = RsvpStep.rsvp;
