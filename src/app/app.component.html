@@ -1,12 +1,18 @@
-<div class="main-container">
-  <h1>You're invited to</h1>
-  <h2>Jamie &amp; Bima's Wedding</h2>
+<div fxLayout="row" fxLayoutAlign="center" style="height: 100%; background-color: tan;">
+  <div class="main-container" fxFlex="75%">
+    <h2>Together with their families</h2>
+    <h1>Jamie &amp; Bima's Wedding</h1>
+    <h2>are getting married</h2>
+    
+    <p>Please RSVP by December 31, 2018 by using the form below.</p>
   
-  <app-login *ngIf="isCorrectStep(rsvpStep.login)"
-             [enableSecretCode]="true"
-             [guestList]="guestList"
-             (emitMainGuest)="setMainGuest($event)"></app-login>
-  
-  <app-rsvp *ngIf="isCorrectStep(rsvpStep.rsvp)"
-            [partyMembers]="partyMembers"></app-rsvp>
+    <app-login *ngIf="isCorrectStep(rsvpStep.login)"
+                [enableSecretCode]="true"
+                [guestList]="guestList"
+                (emitMainGuest)="setMainGuest($event)"></app-login>
+    
+    <app-rsvp *ngIf="isCorrectStep(rsvpStep.rsvp)"
+              [partyMembers]="partyMembers"></app-rsvp>
+  </div>
+  <div fxFlex>Test</div>
 </div>
