@@ -1,4 +1,9 @@
 body {
-  background-image: url("../../assets/palm-background.jpg");
-  background-color: #cccccc;
+  height: 100vh;
+  margin: -21px 10px 0 10px;
+
+  background-image: url('imgs/palm-background.jpg');
+  background-size: auto 100vh;
+  background-repeat: no-repeat;
+  background-position: center center;
 }

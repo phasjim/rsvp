@@ -1,10 +1,12 @@
-<h1>You're invited to</h1>
-<h2>Jamie &amp; Bima's Wedding</h2>
-
-<app-login *ngIf="isCorrectStep(rsvpStep.login)"
-           [enableSecretCode]="true"
-           [guestList]="guestList"
-           (emitMainGuest)="setMainGuest($event)"></app-login>
-
-<app-rsvp *ngIf="isCorrectStep(rsvpStep.rsvp)"
-          [partyMembers]="partyMembers"></app-rsvp>
+<div class="main-container">
+  <h1>You're invited to</h1>
+  <h2>Jamie &amp; Bima's Wedding</h2>
+  
+  <app-login *ngIf="isCorrectStep(rsvpStep.login)"
+             [enableSecretCode]="true"
+             [guestList]="guestList"
+             (emitMainGuest)="setMainGuest($event)"></app-login>
+  
+  <app-rsvp *ngIf="isCorrectStep(rsvpStep.rsvp)"
+            [partyMembers]="partyMembers"></app-rsvp>
+</div>
