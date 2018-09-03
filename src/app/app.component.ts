@@ -10,8 +10,8 @@ import * as _ from 'lodash';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  rsvpStep = RsvpStep;
-  step: RsvpStep = RsvpStep.login;
+  respondStep = RespondStep;
+  step: RespondStep = RespondStep.login;
   
   mainGuest: MainGuest;
   partyMembers: Guest[];
@@ -32,7 +32,7 @@ export class AppComponent {
   ngOnInit() {
   }
 
-  isCorrectStep(currentStep: RsvpStep) {
+  isCorrectStep(currentStep: RespondStep) {
     return this.step === currentStep;
   }
 
@@ -44,13 +44,17 @@ export class AppComponent {
     console.log(this.mainGuest);
     this.partyMembers = this.mainGuest.partyMembers;
 
-    this.step = RsvpStep.rsvp;
+    this.step = RespondStep.respond;
   }
 
+  setNextStep(nextStep: RespondStep) {
+    this.step = nextStep;
+  }
 }
 
-enum RsvpStep {
+// TODO: Add this to it's own model
+export enum RespondStep {
   login = 1,
-  rsvp,
+  respond,
   complete
 }

@@ -1,11 +1,13 @@
 <div class="main-container" fxLayout="row">
   <div class="rsvp-container" fxFlex="40%">
-    <app-login *ngIf="isCorrectStep(rsvpStep.login)"
+    <app-login *ngIf="isCorrectStep(respondStep.login)"
                 [enableSecretCode]="true"
                 [guestList]="guestList"
                 (emitMainGuest)="setMainGuest($event)"></app-login>
     
-    <app-rsvp *ngIf="isCorrectStep(rsvpStep.rsvp)"
-              [partyMembers]="partyMembers"></app-rsvp>
+    <app-rsvp *ngIf="isCorrectStep(respondStep.respond)"
+              (currentStep)="step"
+              [partyMembers]="partyMembers"
+              (emitStep)="setNextStep($event)"></app-rsvp>
   </div>
 </div>

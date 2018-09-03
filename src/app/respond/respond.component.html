@@ -1,5 +1,5 @@
 <div class="guest-container">
-  <h1>J &amp; B</h1>
+  <h3>J &amp; B</h3>
 
   <div *ngFor="let member of partyMembers">
       {{ member.firstName }} {{ member.lastName }}
@@ -25,4 +25,9 @@
       {{ member.firstName }} {{ member.lastName }} is attending: {{ member.isAttending }}<br>
       <!-- entree: {{ member.entree }} -->
     </div>
+    <button mat-raised-button
+            color="accent"
+            type="submit"
+            (click)="onBackButtonClick(respondStep.login)">Back</button>
+
 </div>

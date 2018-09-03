@@ -20,7 +20,7 @@
             Required
           </mat-error>
           <mat-error *ngIf="guestForm.controls['firstName'].touched && guestForm.controls['firstName'].hasError('firstNameDoesNotExist')">
-            First name does not exist
+            First name does not exist on the guest list
           </mat-error>
         </mat-form-field>
       </div>
@@ -34,7 +34,7 @@
             Required
           </mat-error>
           <mat-error *ngIf="guestForm.controls['lastName'].touched && guestForm.controls['lastName'].hasError('lastNameNotValid')">
-            Last name does not match
+            First &amp; last name combination does not exist on the guest list
           </mat-error>
         </mat-form-field>
       </div>
@@ -45,7 +45,7 @@
       <div fxFlex>
         <mat-form-field *ngIf="enableSecretCode">
           <input matInput
-                placeholder="Secret Code"
+                placeholder="Invitation Code"
                 formControlName="code">
           <mat-error *ngIf="guestForm.controls['code'].touched && guestForm.controls['code'].hasError('required')">
             Required
