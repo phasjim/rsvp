@@ -1,13 +1,5 @@
 <div class="main-container" fxLayout="row">
-  <div class="rsvp-container" fxFlex="50%">
-    <h2>Together with their families</h2>
-    <h1>Jamie &amp; Bima</h1>
-    <h2>are getting married!</h2>
-    
-    <div class="push-down">
-      Please RSVP by December 31, 2018 by using the form below.
-    </div>
-  
+  <div class="rsvp-container" fxFlex="40%">
     <app-login *ngIf="isCorrectStep(rsvpStep.login)"
                 [enableSecretCode]="true"
                 [guestList]="guestList"

@@ -1,7 +1,11 @@
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @import 'components/colors';
-// @import 'components/theme';
+@import 'components/theme';
+
+@import 'components/utility';
 @import 'components/main';
 @import 'components/typography';
 @import 'components/containers';
+@import 'components/buttons';
+@import 'components/inputs';

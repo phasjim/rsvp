@@ -18,14 +18,14 @@ import {
 } from '@angular/material';
 
 import { LoginComponent } from './login/login.component';
-import { RsvpComponent } from './rsvp/rsvp.component';
+import { RespondComponent } from './respond/respond.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RsvpComponent
+    RespondComponent
   ],
   imports: [
     BrowserModule,

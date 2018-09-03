@@ -1,53 +1,69 @@
-<div fxLayout="column"
-     class="login-container push-down">
+<div class="login-container push-down">
+  <h2>Together with their families</h2>
+  <h1>Jamie &amp; Bima</h1>
+  <h2>are getting married on Saturday, the 23rd of March</h2>
+  
+  <div class="push-down">
+    Please RSVP by the 31st of December by using the form below
+  </div>
+
   <form [formGroup]="guestForm"
         (ngSubmit)="onSubmit(guestForm)">
-    <mat-form-field>
-      <input matInput
-            placeholder="First name"
-            formControlName="firstName">
-      <mat-error *ngIf="guestForm.controls['firstName'].touched && guestForm.controls['firstName'].hasError('required')">
-        Required
-      </mat-error>
-      <mat-error *ngIf="guestForm.controls['firstName'].touched && guestForm.controls['firstName'].hasError('firstNameDoesNotExist')">
-        First name does not exist
-      </mat-error>
-    </mat-form-field>
 
-    <mat-form-field>
-      <input matInput
-            placeholder="Last name"
-            formControlName="lastName">
-      <mat-error *ngIf="guestForm.controls['lastName'].touched && guestForm.controls['lastName'].hasError('required')">
-        Required
-      </mat-error>
-      <mat-error *ngIf="guestForm.controls['lastName'].touched && guestForm.controls['lastName'].hasError('lastNameNotValid')">
-        Last name does not match
-      </mat-error>
-    </mat-form-field>
+    <div fxLayout="column">
+      <div class="push-down" fxFlex>
+        <mat-form-field>
+          <input matInput
+                placeholder="First name"
+                formControlName="firstName">
+          <mat-error *ngIf="guestForm.controls['firstName'].touched && guestForm.controls['firstName'].hasError('required')">
+            Required
+          </mat-error>
+          <mat-error *ngIf="guestForm.controls['firstName'].touched && guestForm.controls['firstName'].hasError('firstNameDoesNotExist')">
+            First name does not exist
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-    <br>
+      <div fxFlex>
+        <mat-form-field>
+          <input matInput
+                placeholder="Last name"
+                formControlName="lastName">
+          <mat-error *ngIf="guestForm.controls['lastName'].touched && guestForm.controls['lastName'].hasError('required')">
+            Required
+          </mat-error>
+          <mat-error *ngIf="guestForm.controls['lastName'].touched && guestForm.controls['lastName'].hasError('lastNameNotValid')">
+            Last name does not match
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-    <!-- TODO: This should be optional security measure that the user can pick. -->
-    <!-- Ask yourself, who would actually hack your invitation other than other CS geeks? -->
-    <!-- Should this be custom per guest? Or one universal code for the bride/groom? -->
-    <mat-form-field *ngIf="enableSecretCode">
-      <input matInput
-            placeholder="Secret Code"
-            formControlName="code">
-      <mat-error *ngIf="guestForm.controls['code'].touched && guestForm.controls['code'].hasError('required')">
-        Required
-      </mat-error>
-      <mat-error *ngIf="guestForm.controls['code'].touched && guestForm.controls['code'].hasError('codeNotValid')">
-        Secret code is incorrect
-      </mat-error>
-    </mat-form-field>
+      <!-- TODO: This should be optional security measure that the user can pick. -->
+      <!-- Ask yourself, who would actually hack your invitation other than other CS geeks? -->
+      <!-- Should this be custom per guest? Or one universal code for the bride/groom? -->
+      <div fxFlex>
+        <mat-form-field *ngIf="enableSecretCode">
+          <input matInput
+                placeholder="Secret Code"
+                formControlName="code">
+          <mat-error *ngIf="guestForm.controls['code'].touched && guestForm.controls['code'].hasError('required')">
+            Required
+          </mat-error>
+          <mat-error *ngIf="guestForm.controls['code'].touched && guestForm.controls['code'].hasError('codeNotValid')">
+            Secret code is incorrect
+          </mat-error>
+        </mat-form-field>
+      </div>
 
-    <br>
-
-    <button mat-button
+      <div class="push-down push-up" fxFlex>
+        <button mat-raised-button
             color="primary"
             type="submit"
-            [disabled]="guestForm.invalid">Access My Invite</button>
+            [disabled]="guestForm.invalid"
+            class="full-width">Access My Invite</button>
+      </div>
+    </div> <!-- end fxLayout -->
+
   </form>
 </div>
