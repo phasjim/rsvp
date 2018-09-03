@@ -1,9 +1,34 @@
-body {
-  height: 100vh;
-  margin: -21px 10px 0 10px;
+body, html {
+  height: 100%;
+  margin: 0;
+}
 
-  background-image: url('imgs/palm-background.jpg');
-  background-size: auto 100vh;
+.background {
+  background-image: url("imgs/palm-background.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
   background-repeat: no-repeat;
-  background-position: center center;
+  background-size: cover;
+}
+
+::-moz-selection {
+  color: #ffffff;
+  background: $tan;
+}
+
+::selection {
+  color: #ffffff;
+  background: $tan;
+} 
+
+.push-down {
+  margin-top: 25px;
+}
+
+.push-up {
+  margin-bottom: 25px;
 }

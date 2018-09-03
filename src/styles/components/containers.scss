@@ -1,5 +1,12 @@
 .main-container {
+  height: 100%;
+  color: $dark-tan;
+}
+
+.rsvp-container {
+  border: 7px double $light-gray-green;
   background-color: #ffffff;
   margin: auto;
   position: relative;
+  padding: 30px 60px;
 }

@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
+/* Flex Layout */
+import { FlexLayoutModule } from '@angular/flex-layout';
+
 /* Forms */
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,6 +30,8 @@ import { RsvpComponent } from './rsvp/rsvp.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+
+    FlexLayoutModule,
 
     FormsModule,
     ReactiveFormsModule,
