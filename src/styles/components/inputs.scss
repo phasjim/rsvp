@@ -1,12 +1,18 @@
 .app {
+  /* Form Field */
   .mat-form-field {
-    font-family: "Cormorant Garamond", serif;
     letter-spacing: 1px;
     width: 100%;
   }
 
   .mat-error {
     font-style: italic;
+  }
+
+  /* Radio Inputs */
+  .mat-radio-label-content {
+    font-size: 0.8em;
+    letter-spacing: 1px;
   }
 
 }

@@ -1,33 +1,64 @@
-<div class="guest-container">
-  <h3>J &amp; B</h3>
 
-  <div *ngFor="let member of partyMembers">
+You have <b>{{ getPartyMembersString() }}</b> in your party
+
+<div class="respond-container push-down-md">
+  <div *ngFor="let member of partyMembers; let i = index"
+       class="guest-row"
+       [ngClass]="{'last-row':isLastRow(i)}"
+       fxLayout="row">
+
+    <div fxFlex="33%">
       {{ member.firstName }} {{ member.lastName }}
-      <br>
-    
-      <mat-radio-group [(ngModel)]="member.isAttending">
-        <mat-radio-button value="1">Delightfully Accepts</mat-radio-button>
-        <mat-radio-button value="0">Regretfully Declines</mat-radio-button>
-      </mat-radio-group>
-    
-      <br>
-      <!-- <div *ngIf="isEntreeSelectionDisplayed(member)">
-        <mat-radio-group [(ngModel)]="member.entree">
-          <mat-radio-button value="veggie">Veggie</mat-radio-button>
-          <mat-radio-button value="chicken">Chicken</mat-radio-button>
-          <mat-radio-button value="beef">Beef</mat-radio-button>
-        </mat-radio-group>
-      </div> -->
     </div>
-    
-    <br><br><br>
-    <div *ngFor="let member of partyMembers">
-      {{ member.firstName }} {{ member.lastName }} is attending: {{ member.isAttending }}<br>
-      <!-- entree: {{ member.entree }} -->
+
+    <!-- Options -->
+    <div fxFlex>
+      <div fxLayout="column">
+        <!-- Accepts or Declines -->
+        <div fxFlex>
+          <mat-radio-group [(ngModel)]="member.isAttending">
+              <div fxLayout="row">
+                <div fxFlex>
+                  <mat-radio-button [value]="true">Delightfully<br>Accepts</mat-radio-button>
+                </div>
+                <div fxFlex>
+                  <mat-radio-button [value]="false">Regretfully<br>Declines</mat-radio-button>
+                </div>
+              </div>
+            </mat-radio-group>
+        </div>
+
+        <!-- Entree Selection -->
+        <div class="push-down-sm" *ngIf="isEntreeSelectionDisplayed(member)">
+          <div fxLayout="row">
+            <div fxFlex>
+              <mat-form-field>
+                <mat-select [placeholder]="getEntreePlaceholderText(member.firstName)">
+                  <mat-option *ngFor="let food of foods" value="food">
+                    {{food}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- end fxLayout column -->
+    </div> <!-- end options-->
+  </div> <!-- end ngFor -->
+
+  <div fxLayout="row push-down-md">
+    <div fxFlex>
+      <button mat-raised-button
+              color="accent"
+              (click)="onBackButtonClick(respondStep.login)">Back</button>
     </div>
-    <button mat-raised-button
-            color="accent"
-            type="submit"
-            (click)="onBackButtonClick(respondStep.login)">Back</button>
+
+    <div class="pull-right" fxFlex>
+      <button mat-raised-button
+              color="primary"
+              (click)="onBackButtonClick(respondStep.note)">Continue</button>
+    </div>
+  </div>
 
 </div>

@@ -1,17 +1,19 @@
-<div class="login-container push-down">
-  <h2>Together with their families</h2>
-  <h1>Jamie &amp; Bima</h1>
-  <h2>are getting married on Saturday, the 23rd of March</h2>
-  
-  <div class="push-down">
-    Please RSVP by the 31st of December by using the form below
-  </div>
+<h2>Together with their families</h2>
+<h1>Jamie &amp; Bima</h1>
+<h2>are getting married on<br>Saturday, the 23rd of March</h2>
 
+<hr>
+
+<div class="push-down-md">
+  Please RSVP by the 31st of December by using the form below
+</div>
+
+<div class="login-container push-down-md">
   <form [formGroup]="guestForm"
         (ngSubmit)="onSubmit(guestForm)">
 
     <div fxLayout="column">
-      <div class="push-down" fxFlex>
+      <div fxFlex>
         <mat-form-field>
           <input matInput
                 placeholder="First name"
@@ -56,7 +58,7 @@
         </mat-form-field>
       </div>
 
-      <div class="push-down push-up" fxFlex>
+      <div class="push-down-md push-up-md" fxFlex>
         <button mat-raised-button
             color="primary"
             type="submit"

@@ -19,11 +19,16 @@ export class AppComponent {
   // TODO: Need to read this from somewhere
   guestList = [
     { firstName: 'Prita', lastName: 'Hasjim', code: '123', partyMembers: [
-      { firstName: 'Prita', lastName: 'Hasjim', isAttending: false, entree: '' }
+      { firstName: 'Prita', lastName: 'Hasjim', isAttending: null, entree: null }
     ]}, 
     { firstName: 'Derek', lastName: 'Bloom', code: '123', partyMembers: [
-      { firstName: 'Derek', lastName: 'Bloom', isAttending: false, entree: '' },
-      { firstName: 'Brianna', lastName: 'B-C', isAttending: false, entree: '' }
+      { firstName: 'Derek', lastName: 'Bloom', isAttending: null, entree: null },
+      { firstName: 'Brianna', lastName: 'Blumenthal-Cohen', isAttending: null, entree: null }
+    ]},
+    { firstName: 'Kirk', lastName: 'Saechao', code: '123', partyMembers: [
+      { firstName: 'Kirk', lastName: 'Saechao', isAttending: null, entree: null },
+      { firstName: 'Sabrina', lastName: 'Saechao', isAttending: null, entree: null },
+      { firstName: 'Alex', lastName: 'Saechao', isAttending: null, entree: null }
     ]}
   ];
 
@@ -56,5 +61,6 @@ export class AppComponent {
 export enum RespondStep {
   login = 1,
   respond,
+  note,
   complete
 }

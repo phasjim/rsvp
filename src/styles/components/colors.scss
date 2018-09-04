@@ -19,3 +19,6 @@ $light-gray-green: #D6DBD0;
 $light-tan: #ebddc8;
 $tan: #dfcdab;
 $dark-tan: darken($tan, 40%);
+
+$gray: lighten(#000000, 50%);
+$light-gray: lighten(#000000, 75%);

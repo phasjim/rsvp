@@ -10,8 +10,9 @@ import { Guest } from '../../models/guest';
 })
 export class RespondComponent implements OnInit {
   respondStep = RespondStep;
+  foods: string[] = ['chicken', 'fish', 'vegetarian'];
 
-  @Input() partyMembers: Guest;
+  @Input() partyMembers: Guest[];
   @Input() currentStep: RespondStep;
   
   @Output() emitStep: EventEmitter<RespondStep> = new EventEmitter<RespondStep>();
@@ -21,10 +22,26 @@ export class RespondComponent implements OnInit {
   ngOnInit() {
   }
 
+  getEntreePlaceholderText(memberFirstName: string) {
+    return memberFirstName + "'s entree";
+  }
+
+  getPartyMembersString() {
+    if(this.partyMembers.length === 1) {
+      return "1 member";
+    } else {
+      return this.partyMembers.length + " members";
+    }
+  }
+
   isEntreeSelectionDisplayed(member: Guest) {
     debugger;
-    if(member.isAttending) return true;
-    return false;
+    if(member.isAttending === true) return true;
+    else return false;
+  }
+
+  isLastRow(index: number) {
+    return (index + 1 === this.partyMembers.length);
   }
 
   onBackButtonClick(nextStep: RespondStep) {

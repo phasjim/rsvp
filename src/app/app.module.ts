@@ -14,7 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatRadioModule,
-  MatInputModule
+  MatInputModule,
+  MatSelectModule
 } from '@angular/material';
 
 import { LoginComponent } from './login/login.component';
@@ -39,6 +40,7 @@ import { RespondComponent } from './respond/respond.component';
     MatButtonModule,
     MatRadioModule,
     MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

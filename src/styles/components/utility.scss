@@ -1,7 +1,23 @@
-.push-down {
+.push-down-sm {
+  margin-top: 10px;
+}
+
+.push-down-md {
   margin-top: 25px;
 }
 
-.push-up {
+.push-up-sm {
+  margin-bottom: 10px;
+}
+
+.push-up-md {
   margin-bottom: 25px;
+}
+
+.pull-left {
+  text-align: left;
+}
+
+.pull-right {
+  text-align: right;
 }

@@ -1,0 +1,15 @@
+@import '../../styles/components/colors';
+
+.respond-container {
+  text-align: left !important;
+}
+
+.guest-row {
+  padding: 15px 0;
+  border-bottom: 1px dotted $light-gray;
+
+  &.last-row {
+    border-bottom: 0;
+    margin-bottom: 15px;
+  }
+}

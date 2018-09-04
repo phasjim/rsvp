@@ -3,6 +3,17 @@ body, html {
   margin: 0;
 }
 
+* {
+  font-family: "Cormorant Garamond", serif !important; 
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid $gray;
+  width: 25px;
+  margin: 20px auto;
+}
+
 .app {
   background-image: url('/imgs/palm-background.jpg');
 
