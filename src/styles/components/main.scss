@@ -15,11 +15,11 @@ hr {
 }
 
 .app {
-  background-image: url('/imgs/palm-background.jpg');
-
-  /* Full height */
+  position: fixed;
   height: 100%; 
+  width: 100%;
 
+  background-image: url('/imgs/palm-background.jpg');
   /* Center and scale the image nicely */
   background-position: center;
   background-repeat: no-repeat;

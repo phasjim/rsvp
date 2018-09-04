@@ -1,5 +1,11 @@
-<div class="main-container" fxLayout="row">
-  <div class="rsvp-container" fxFlex="40%">
+<div class="main-container">
+  <div class="rsvp-container">
+    <h2>Together with their families</h2>
+    <h1>Jamie &amp; Bima</h1>
+    <h2>are getting married on<br>Saturday, the 23rd of March</h2>
+    
+    <hr>
+
     <app-login *ngIf="isCorrectStep(respondStep.login)"
                 [enableSecretCode]="true"
                 [guestList]="guestList"
@@ -13,6 +19,6 @@
     <app-note *ngIf="isCorrectStep(respondStep.note)"
               (currentStep)="step"
               (emitStep)="setNextStep($event)"></app-note>
-              
+
   </div>
 </div>

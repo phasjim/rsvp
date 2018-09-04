@@ -1,18 +1,12 @@
-<h2>Together with their families</h2>
-<h1>Jamie &amp; Bima</h1>
-<h2>are getting married on<br>Saturday, the 23rd of March</h2>
-
-<hr>
-
 <div class="push-down-md">
   Please RSVP by the 31st of December by using the form below
 </div>
 
-<div class="login-container push-down-md">
+<div class="login-container push-down-lg">
   <form [formGroup]="guestForm"
         (ngSubmit)="onSubmit(guestForm)">
 
-    <div fxLayout="column">
+    <div class="form-container" fxLayout="column">
       <div fxFlex>
         <mat-form-field>
           <input matInput
@@ -53,17 +47,17 @@
             Required
           </mat-error>
           <mat-error *ngIf="guestForm.controls['code'].touched && guestForm.controls['code'].hasError('codeNotValid')">
-            Secret code is incorrect
+            Invitation code is incorrect
           </mat-error>
         </mat-form-field>
       </div>
 
-      <div class="push-down-md push-up-md" fxFlex>
+      <div class="push-down-lg push-up-sm" fxFlex>
         <button mat-raised-button
             color="primary"
             type="submit"
             [disabled]="guestForm.invalid"
-            class="full-width">Access My Invite</button>
+            class="full-width">Access My Invitation</button>
       </div>
     </div> <!-- end fxLayout -->
 
