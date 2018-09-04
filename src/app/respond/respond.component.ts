@@ -10,13 +10,12 @@ import { Guest } from '../../models/guest';
 })
 export class RespondComponent implements OnInit {
   respondStep = RespondStep;
-  foods: string[] = ['chicken', 'fish', 'vegetarian'];
-
-  @Input() partyMembers: Guest[];
   @Input() currentStep: RespondStep;
-  
+  @Input() partyMembers: Guest[];
   @Output() emitStep: EventEmitter<RespondStep> = new EventEmitter<RespondStep>();
 
+  foods: string[] = ['chicken', 'fish', 'vegetarian'];
+  
   constructor() { }
 
   ngOnInit() {
@@ -35,7 +34,6 @@ export class RespondComponent implements OnInit {
   }
 
   isEntreeSelectionDisplayed(member: Guest) {
-    debugger;
     if(member.isAttending === true) return true;
     else return false;
   }

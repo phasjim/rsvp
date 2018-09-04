@@ -6,8 +6,13 @@
                 (emitMainGuest)="setMainGuest($event)"></app-login>
     
     <app-rsvp *ngIf="isCorrectStep(respondStep.respond)"
-              (currentStep)="step"
               [partyMembers]="partyMembers"
+              (currentStep)="step"
               (emitStep)="setNextStep($event)"></app-rsvp>
+
+    <app-note *ngIf="isCorrectStep(respondStep.note)"
+              (currentStep)="step"
+              (emitStep)="setNextStep($event)"></app-note>
+              
   </div>
 </div>

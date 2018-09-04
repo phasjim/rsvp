@@ -20,13 +20,15 @@ import {
 
 import { LoginComponent } from './login/login.component';
 import { RespondComponent } from './respond/respond.component';
+import { NoteComponent } from './note/note.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RespondComponent
+    RespondComponent,
+    NoteComponent
   ],
   imports: [
     BrowserModule,
