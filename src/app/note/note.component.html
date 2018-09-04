@@ -1,0 +1,32 @@
+<div fxLayout="column">
+  <div fxFlex>
+    <h1>Send us a love note!</h1>
+  </div>
+
+  <div fxFlex>
+    This is a good place to tell us about any dietary restrictions, song requests you may have, or how excited you are!
+  </div>
+
+  <div class="push-down-md" fxFlex>
+    <mat-form-field floatLabel="never" appearance="outline">
+      <textarea rows="4" matInput></textarea>
+    </mat-form-field>
+  </div>
+
+  <div fxFlex class="text-center push-down-md">
+    <div fxLayout="row">
+      <div class="pull-left" fxFlex>
+        <button mat-raised-button
+                color="accent"
+                (click)="onBackButtonClick(respondStep.respond)">Back</button>
+      </div>
+
+      <div class="pull-right" fxFlex>
+        <button mat-raised-button
+                color="primary"
+                (click)="onBackButtonClick(respondStep.complete)">Send</button>
+      </div>
+    </div>
+  </div>
+
+</div>
